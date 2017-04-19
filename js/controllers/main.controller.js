@@ -2,7 +2,7 @@
 'use strict';
 
 
-carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $firebaseArray) {
+carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $firebaseArray, NgTableParams) {
 
     var url = 'https://caroffers-2d1be.firebaseio.com/offers';
 	var fireRef = new Firebase(url);
@@ -19,7 +19,22 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
         city:"",
         dealer:"",
         price:"",
-    }
+    };
+
+    var offersDataSet = [];
+
+    $scope.offers.$loaded().then(function(){
+        angular.forEach($scope.offers, function(offer) {
+            offersDataSet.push(offer);
+        })
+
+        $scope.tableParam = new NgTableParams({}, {dataset: offersDataSet});
+
+    });
+
+
+
+
 	$scope.newTodo = '';
 	$scope.editedTodo = null;
 

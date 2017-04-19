@@ -7,4 +7,4 @@
  *
  * @type {angular.Module}
  */
-var carOffersApp = angular.module('carOffersApp', ['firebase']);
+var carOffersApp = angular.module('carOffersApp', ['firebase', 'ngTable']);

@@ -8,6 +8,7 @@
 	<link rel="stylesheet" href="./modules/todomvc-app-css/index.css">
 	<link rel="stylesheet" href="./modules/todomvc-app-css/bootstrap.css">
 	<link rel="stylesheet" href="./modules/todomvc-app-css/sb-admin-2.css">
+	<link rel="stylesheet" href="./modules/todomvc-app-css/ng-table.min.css">
 	<style>
 		[ng-cloak] {
 			display: none;
@@ -24,15 +25,18 @@
 			<div class="row">
 				<div class="col-lg-6">
 					<h3 class="page-header">Arama</h1>
-
-						<ul id="offer-list">
-							{{offers}}
-							<li ng-repeat="offer in offers">
-								<div class="view">
-									{{offer.title}}
-								</div>
-							</li>
-						</ul>
+						<table ng-table="tableParam" class="table table-condensed table-bordered table-striped" show-filter="true">
+						    <tr ng-repeat="offer in $data">
+								<td title="'Marka'" filter="{ Brand: 'text'}">{{offer.brand}}</td>
+								<td title="'Model'" filter="{ model: 'text'}">{{offer.model}}</td>
+								<td title="'Paket'">{{offer.package}}</td>
+								<td title="'Yıl'">{{offer.model}}</td>
+								<td title="'Şehir'">{{offer.city}}</td>
+						        <td title="'Satıcı'">{{offer.dealer}}</td>
+						        <td title="'Fiyat'">{{offer.price}}</td>
+								<td title="'Tarih'">{{offer.dated}}</td>
+						    </tr>
+						</table>
 				</div>
 
 				<div class="col-lg-6">
@@ -134,6 +138,7 @@
 		<script src="./modules/todomvc-common/base.js"></script>
 		<script src="./modules/angular/angular.js"></script>
 		<script src="./modules/angularfire/dist/angularfire.js"></script>
+		<script src="./modules/ng-table/ng-table.min.js"></script>
 		<script src="./js/app.js"></script>
 		<script src="./js/controllers/main.controller.js"></script>
 	</body>
