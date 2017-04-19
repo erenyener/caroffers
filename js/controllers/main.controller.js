@@ -9,6 +9,7 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
 
 	// Bind the todos to the firebase provider.
 	$scope.offers = $firebaseArray(fireRef);
+    $scope.loading = true;
     $scope.newOffer = {
         brand:"",
         model:"",
@@ -29,6 +30,7 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
         })
 
         $scope.tableParam = new NgTableParams({}, {dataset: offersDataSet});
+        $scope.loading = false;
 
     });
 
@@ -53,6 +55,8 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
             city:"",
             dealer:"",
         }
+
+        location.reload();
     }
 
 	$scope.addTodo = function () {
