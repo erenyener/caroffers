@@ -1,0 +1,72 @@
+/*global todomvc, angular, Firebase */
+'use strict';
+
+
+carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $firebaseArray) {
+
+    var url = 'https://caroffers-2d1be.firebaseio.com/offers';
+	var fireRef = new Firebase(url);
+
+	// Bind the todos to the firebase provider.
+	$scope.todos = $firebaseArray(fireRef);
+	$scope.newTodo = '';
+	$scope.editedTodo = null;
+
+
+
+	$scope.addTodo = function () {
+		var newTodo = $scope.newTodo.trim();
+		if (!newTodo.length) {
+			return;
+		}
+		$scope.todos.$add({
+			title: newTodo,
+			completed: false
+		});
+		$scope.newTodo = '';
+	};
+
+	$scope.editTodo = function (todo) {
+		$scope.editedTodo = todo;
+		$scope.originalTodo = angular.extend({}, $scope.editedTodo);
+	};
+
+	$scope.doneEditing = function (todo) {
+		$scope.editedTodo = null;
+		var title = todo.title.trim();
+		if (title) {
+			$scope.todos.$save(todo);
+		} else {
+			$scope.removeTodo(todo);
+		}
+	};
+
+	$scope.revertEditing = function (todo) {
+		todo.title = $scope.originalTodo.title;
+		$scope.doneEditing(todo);
+	};
+
+	$scope.removeTodo = function (todo) {
+		$scope.todos.$remove(todo);
+	};
+
+	$scope.clearCompletedTodos = function () {
+		$scope.todos.forEach(function (todo) {
+			if (todo.completed) {
+				$scope.removeTodo(todo);
+			}
+		});
+	};
+
+	$scope.markAll = function (allCompleted) {
+		$scope.todos.forEach(function (todo) {
+			todo.completed = allCompleted;
+			$scope.todos.$save(todo);
+		});
+	};
+
+	if ($location.path() === '') {
+		$location.path('/');
+	}
+	$scope.location = $location;
+});
