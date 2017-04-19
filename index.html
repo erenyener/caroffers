@@ -50,46 +50,62 @@
 
 										<div class="row">
 											<div class="col-lg-6">
-												<input ng-model="newOffer.brand" class="form-control" placeholder="Marka">
+												<label>Marka</label>
+												<input ng-model="newOffer.brand" class="form-control" placeholder="BMW">
 											</div>
 											<div class="col-lg-6">
-												<input ng-model="newOffer.model" class="form-control" placeholder="Model">
+												<label>Model</label>
+												<input ng-model="newOffer.model" class="form-control" placeholder="3.20 D">
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-6">
-												<input ng-model="newOffer.package" class="form-control" placeholder="Paket İsmi">
+												<label>Paket İsmi</label>
+												<input ng-model="newOffer.package" class="form-control" placeholder="M Paket">
 											</div>
 											<div class="col-lg-6">
-												<input ng-model="newOffer.modelYear" class="form-control" placeholder="Model Yılı">
-											</div>
-										</div>
-
-										<div class="row mt-20">
-											<div class="col-lg-12">
-												<textarea ng-model="newOffer.optinals" class="form-control" rows="3" placeholder="Opsiyonlar"></textarea>
-											</div>
-										</div>
-
-										<div class="row mt-20">
-											<div class="col-lg-6">
-												<input ng-model="newOffer.city" class="form-control" placeholder="Şehir">
-											</div>
-											<div class="col-lg-6">
-												<input ng-model="newOffer.dealer" class="form-control" placeholder="Bayi İsmi">
+												<label>Model Yılı</label>
+												<input ng-model="newOffer.modelYear" class="form-control" placeholder="2017">
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-12">
-												<textarea ng-model="newOffer.additional" class="form-control" rows="3" placeholder="Paylaşmak istediğiniz ek bilgiler"></textarea>
+												<label>Opsiyonlar</label>
+												<textarea ng-model="newOffer.optinals" class="form-control" rows="3" placeholder="sunroof, led stoplar vs..."></textarea>
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-6">
+												<label>Şehir</label>
+												<input ng-model="newOffer.city" class="form-control" placeholder="İstanbul">
+											</div>
+											<div class="col-lg-6">
+												<label>Bayi İsmi</label>
+												<input ng-model="newOffer.dealer" class="form-control" placeholder="Borusan İstinye">
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-12">
-												<input ng-model="newOffer.price" class="form-control" rows="3" placeholder="Fiyat"></textarea>
+												<label>Paylaşmak istediğiniz ek bilgiler</label>
+												<textarea ng-model="newOffer.additional" class="form-control" rows="3" placeholder=""></textarea>
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-12">
+												<label>Fiyat</label>
+												<input ng-model="newOffer.price" class="form-control" rows="3" placeholder="100.000"></textarea>
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-12">
+												<label>Tarih</label>
+												<input ng-model="newOffer.date" class="form-control" rows="3" placeholder="01/05/17"></textarea>
 											</div>
 										</div>
 
