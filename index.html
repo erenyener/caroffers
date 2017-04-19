@@ -1,50 +1,116 @@
 <!doctype html>
 <html lang="en" ng-app="carOffersApp" data-framework="firebase">
-	<head>
-		<meta charset="utf-8">
-		<title>Car Offers</title>
-		<link rel="stylesheet" href="./modules/todomvc-common/base.css">
-		<link rel="stylesheet" href="./modules/todomvc-app-css/index.css">
-		<link rel="stylesheet" href="./modules/todomvc-app-css/bootstrap.css">
-		<link rel="stylesheet" href="./modules/todomvc-app-css/sb-admin-2.css">
-		<style>[ng-cloak] { display: none; }</style>
-	</head>
-	<body>
-		<section ng-controller="MainController">
 
-			<div id="page-wrapper" style="min-height: 1000px;">
+<head>
+	<meta charset="utf-8">
+	<title>Car Offers</title>
+	<link rel="stylesheet" href="./modules/todomvc-common/base.css">
+	<link rel="stylesheet" href="./modules/todomvc-app-css/index.css">
+	<link rel="stylesheet" href="./modules/todomvc-app-css/bootstrap.css">
+	<link rel="stylesheet" href="./modules/todomvc-app-css/sb-admin-2.css">
+	<style>
+		[ng-cloak] {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<section ng-controller="MainController" ng-cloak>
+
+		<div id="page-wrapper" style="min-height: 1000px;">
 
 
-            <div class="row">
+			<div class="row">
 				<div class="col-lg-6">
 					<h3 class="page-header">Arama</h1>
+
+						<ul id="offer-list">
+							{{offers}}
+							<li ng-repeat="offer in offers">
+								<div class="view">
+									{{offer.title}}
+								</div>
+							</li>
+						</ul>
 				</div>
+
 				<div class="col-lg-6">
 					<h3 class="page-header">Teklif Gir</h1>
+
+						<div class="panel panel-default">
+                        <div class="panel-heading">
+                            Teklif Detayları
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <form role="form">
+
+
+										<div class="row">
+											<div class="col-lg-6">
+												<input ng-model="newOffer.brand" class="form-control" placeholder="Marka">
+											</div>
+											<div class="col-lg-6">
+												<input ng-model="newOffer.model" class="form-control" placeholder="Model">
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-6">
+												<input ng-model="newOffer.package" class="form-control" placeholder="Paket İsmi">
+											</div>
+											<div class="col-lg-6">
+												<input ng-model="newOffer.modelYear" class="form-control" placeholder="Model Yılı">
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-12">
+												<textarea ng-model="newOffer.optinals" class="form-control" rows="3" placeholder="Opsiyonlar"></textarea>
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-6">
+												<input ng-model="newOffer.city" class="form-control" placeholder="Şehir">
+											</div>
+											<div class="col-lg-6">
+												<input ng-model="newOffer.dealer" class="form-control" placeholder="Bayi İsmi">
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-12">
+												<textarea ng-model="newOffer.additional" class="form-control" rows="3" placeholder="Paylaşmak istediğiniz ek bilgiler"></textarea>
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-12">
+												<input ng-model="newOffer.price" class="form-control" rows="3" placeholder="Fiyat"></textarea>
+											</div>
+										</div>
+
+										<div class="row mt-20">
+											<div class="col-lg-12">
+												<button type="submit" ng-click="addOffer()" class="btn btn-default">Ekle</button>
+											</div>
+										</div>
+                                    </form>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
 				</div>
+
             </div>
 
         </div>
 
-
-			<header id="header">
-				<h1>offers</h1>
-				<form id="todo-form" ng-submit="addTodo()">
-					<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus>
-				</form>
-			</header>
-
-
-			<section id="main" ng-cloak>
-				<ul id="todo-list">
-					<li ng-repeat="(id, todo) in todos" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-						<div class="view">
-							<label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
-						</div>
-					</li>
-				</ul>
-
-			</section>
 
 		</section>
 
