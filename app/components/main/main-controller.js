@@ -1,3 +1,3 @@
 export default /*@ngInject*/ function() {
-    this.applicationName = 'caroffers';
+    this.applicationName = 'test';
 }

@@ -11,6 +11,7 @@ var KarmaServer = require('karma').Server;
 var webpack = require("webpack");
 var WebpackDevServer = require("webpack-dev-server");
 var webpackConfig = require("./webpack.config.js");
+var webpackConfigDev = require("./webpack.dev.config.js");
 var minimist = require('minimist');
 
 var knownOptions = {
@@ -71,6 +72,19 @@ gulp.task("package", ["clean", "version"], function(done) {
     });
 });
 
+
+gulp.task("package-dev", ["clean", "version"], function(done) {
+    webpack(webpackConfigDev, function(err, stats) {
+        if (stats.compilation.errors.length) {
+            throw new gutil.PluginError('webpack', stats.compilation.errors.toString());
+        }
+        if (stats.compilation.warnings.length) {
+            gutil.log('[WARNING]', stats.compilation.warnings.toString())
+        }
+        done();
+    });
+});
+
 gulp.task("githash", function(done) {
 	git.exec({args: 'rev-parse --short HEAD'}, function(err, stdout) {
 		gitHash = stdout;
@@ -97,6 +111,7 @@ gulp.task('version', ["githash"], function() {
 	.pipe(gulp.dest('./app/services/'));
 });
 
+gulp.task("build-dev", ["package-dev"]);
 gulp.task("build", ["package"]);
 
 gulp.task("serve", ["webpack-dev-server"]);
