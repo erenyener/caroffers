@@ -21,6 +21,10 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
         city:"",
         dealer:"",
         price:"",
+        transmission: false,
+        sunroof: false,
+        panoramic: false,
+        zeroInterest: false
     };
 
     var offersDataSet = [];
@@ -60,25 +64,9 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
 
         if(!isInvalid){
             $scope.offers.$add($scope.newOffer);
-
-            $scope.newOffer = {
-                brand:"",
-                model:"",
-                package:"",
-                modelYear:"",
-                optinals:"",
-                additional:"",
-                city:"",
-                dealer:"",
-            }
-
             location.reload();
         }
-
     }
-
-
-
 
 
 

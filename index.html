@@ -70,7 +70,15 @@
 						        <td title="'Satıcı'">{{offer.dealer}}</td>
 						        <td title="'Fiyat'">{{offer.price}}</td>
 								<td title="'Tarih'">{{offer.date}}</td>
-								<td title="'Detaylar'"><button type="button" class="btn btn-danger btn-xs" ng-click="openDetails(offer)">Detayları Gör</button></td>
+								<td title="'Detaylar'" style="text-align:center">
+									<button type="button" class="btn btn-primary btn-xs" ng-click="openDetails(offer)">Opsiyonları Gör</button>
+									<button type="button" class="btn btn-danger btn-xs mt-3" ng-if="offer.transmission">Otomatik Vites</button>
+									<button type="button" class="btn btn-warning btn-xs mt-3" ng-if="offer.sunroof">Sunroof</button>
+									<button type="button" class="btn btn-info btn-xs mt-3" ng-if="offer.panoramic">Panoramik Tavan</button>
+								</td>
+								<td>
+									<button type="button" class="btn btn-success btn-xs mt-3" ng-if="offer.zeroInterest">Sıfır Faiz - {{offer.zeroInterestPrice}}</button>
+								</td>
 						    </tr>
 						</table>
 				</div>
@@ -132,7 +140,7 @@
 												</div>
 
 											</div>
-											<div class="col-lg-6">
+											<div class="col-lg-3">
 												<div class="form-group"  ng-class="{ 'has-error': (offerForm.modelYear.$invalid && offerForm.modelYear.$touched)}">
 													<label>Model Yılı</label>
 													<input name="modelYear" ng-model="newOffer.modelYear" class="form-control" placeholder="2016" ng-maxlength="6">
@@ -140,6 +148,27 @@
 													<div class="invalid-message-half-column" ng-show="(offerForm.package.$error.modelYear) && offerForm.package.$touched ">
 														<label class="control-label">Paket 40 karaktere kadar olabilir</label>
 													</div>
+												</div>
+											</div>
+											<div class="col-lg-3">
+												<div class="checkbox">
+													<label>
+														<input name="transmission" type="checkbox" ng-model="newOffer.transmission">
+														Otomatik Vites
+													</label>
+												</div>
+												<div class="checkbox">
+													<label>
+														<input name="sunroof" type="checkbox" ng-model="newOffer.sunroof">
+														Sunroof
+													</label>
+												</div>
+
+												<div class="checkbox">
+													<label>
+														<input name="panoramic" type="checkbox" ng-model="newOffer.panoramic">
+														Panoramik Cam Tavan
+													</label>
 												</div>
 											</div>
 										</div>
@@ -193,7 +222,7 @@
 										</div>
 
 										<div class="row mt-20">
-											<div class="col-lg-12">
+											<div class="col-lg-6">
 												<div class="form-group"  ng-class="{ 'has-error': (offerForm.price.$invalid && offerForm.price.$touched)}">
 													<label>Fiyat</label>
 													<input name="price" ui-number-mask="0" ng-model="newOffer.price" class="form-control" rows="3" placeholder="190.000" required ng-minlength="1" ng-maxlength="50"></textarea>
@@ -204,6 +233,19 @@
 													<div class="invalid-message-half-column" ng-show="(offerForm.price.$error.maxlength || offerForm.price.$error.minlength) && offerForm.price.$touched ">
 														<label class="control-label">Fiyat 50 basamaklı olabilir</label>
 													</div>
+												</div>
+											</div>
+
+											<div class="col-lg-6">
+												<div class="checkbox">
+													<label>
+														<input name="zeroInterest" type="checkbox" ng-model="newOffer.zeroInterest">
+														Sıfır Faiz Kampanyası Var mı ?
+													</label>
+												</div>
+												<div ng-if="newOffer.zeroInterest" class="form-group">
+													<label>Maksimum Sıfır Faiz Kredi Miktarı</label>
+													<input name="zeroInterestPrice" ui-number-mask="0" ng-model="newOffer.zeroInterestPrice" class="form-control" rows="3" placeholder="50.000" >
 												</div>
 											</div>
 										</div>
