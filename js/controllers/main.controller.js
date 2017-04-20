@@ -41,35 +41,26 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
 	$scope.editedTodo = null;
 
 
-    $scope.addOffer = function(newOffer){
+    $scope.addOffer = function(isInvalid){
 
-        $scope.offers.$add($scope.newOffer);
+        if(!isInvalid){
+            $scope.offers.$add($scope.newOffer);
 
-        $scope.newOffer = {
-            brand:"",
-            model:"",
-            package:"",
-            modelYear:"",
-            optinals:"",
-            additional:"",
-            city:"",
-            dealer:"",
+            $scope.newOffer = {
+                brand:"",
+                model:"",
+                package:"",
+                modelYear:"",
+                optinals:"",
+                additional:"",
+                city:"",
+                dealer:"",
+            }
+
+            location.reload();
         }
 
-        location.reload();
     }
-
-	$scope.addTodo = function () {
-		var newTodo = $scope.newTodo.trim();
-		if (!newTodo.length) {
-			return;
-		}
-		$scope.offers.$add({
-			title: newTodo,
-			completed: false
-		});
-		$scope.newTodo = '';
-	};
 
 
 

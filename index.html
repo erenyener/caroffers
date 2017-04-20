@@ -50,73 +50,145 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <form role="form">
-
+                                    <form name="offerForm">
 
 										<div class="row">
 											<div class="col-lg-6">
-												<label>Marka</label>
-												<input ng-model="newOffer.brand" class="form-control" placeholder="BMW">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.brand.$invalid && offerForm.brand.$touched)}">
+													<label>Marka</label>
+													<input ng-model="newOffer.brand" class="form-control" placeholder="BMW" name="brand"  required ng-minlength="1" ng-maxlength="40">
+													<div class="invalid-message-half-column" ng-show="offerForm.brand.$error.required && offerForm.brand.$touched">
+														<label class="control-label">Marka Girilmesi Zorunludur</label>
+													</div>
+													<div class="invalid-message-half-column" ng-show="(offerForm.brand.$error.maxlength || offerForm.brand.$error.minlength) && offerForm.brand.$touched ">
+														<label class="control-label">Marka 40 karaktere kadar olabilir</label>
+													</div>
+												</div>
 											</div>
+
 											<div class="col-lg-6">
-												<label>Model</label>
-												<input ng-model="newOffer.model" class="form-control" placeholder="3.20 D">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.model.$invalid && offerForm.model.$touched)}">
+													<label>Model</label>
+													<input ng-model="newOffer.model" class="form-control" name="model" placeholder="3.20ied" required ng-minlength="1" ng-maxlength="50">
+
+													<div class="invalid-message-half-column" ng-show="offerForm.model.$error.required && offerForm.model.$touched">
+														<label class="control-label">Model Girilmesi Zorunludur</label>
+													</div>
+													<div class="invalid-message-half-column" ng-show="(offerForm.model.$error.maxlength || offerForm.model.$error.minlength) && offerForm.model.$touched ">
+														<label class="control-label">Model 40 karaktere kadar olabilir</label>
+													</div>
+
+												</div>
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-6">
-												<label>Paket İsmi</label>
-												<input ng-model="newOffer.package" class="form-control" placeholder="M Paket">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.package.$invalid && offerForm.package.$touched)}">
+													<label>Paket İsmi</label>
+													<input name="package" ng-model="newOffer.package" class="form-control" required placeholder="M Plus" ng-maxlength="50">
+
+													<div class="invalid-message-half-column" ng-show="offerForm.package.$error.required && offerForm.package.$touched">
+														<label class="control-label">Paket Girilmesi Zorunludur</label>
+													</div>
+													<div class="invalid-message-half-column" ng-show="(offerForm.package.$error.maxlength) && offerForm.package.$touched ">
+														<label class="control-label">Paket 40 karaktere kadar olabilir</label>
+													</div>
+												</div>
+
 											</div>
 											<div class="col-lg-6">
-												<label>Model Yılı</label>
-												<input ng-model="newOffer.modelYear" class="form-control" placeholder="2017">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.modelYear.$invalid && offerForm.modelYear.$touched)}">
+													<label>Model Yılı</label>
+													<input name="modelYear" ng-model="newOffer.modelYear" class="form-control" placeholder="2016" ng-maxlength="6">
+
+													<div class="invalid-message-half-column" ng-show="(offerForm.package.$error.modelYear) && offerForm.package.$touched ">
+														<label class="control-label">Paket 40 karaktere kadar olabilir</label>
+													</div>
+												</div>
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-12">
+												<div class="form-group"></div>
 												<label>Opsiyonlar</label>
-												<textarea ng-model="newOffer.optinals" class="form-control" rows="3" placeholder="sunroof, led stoplar vs..."></textarea>
+												<textarea name="optinals" ng-model="newOffer.optinals" class="form-control" rows="3" placeholder="sunroof, led stoplar, elektrikli koltuklar vs..."></textarea>
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-6">
-												<label>Şehir</label>
-												<input ng-model="newOffer.city" class="form-control" placeholder="İstanbul">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.city.$invalid && offerForm.city.$touched)}">
+													<label>Şehir</label>
+													<input name="city" ng-model="newOffer.city" class="form-control" placeholder="İstanbul" required ng-minlength="1" ng-maxlength="50">
+
+													<div class="invalid-message-half-column" ng-show="offerForm.city.$error.required && offerForm.city.$touched">
+														<label class="control-label">Şehir Girilmesi Zorunludur</label>
+													</div>
+													<div class="invalid-message-half-column" ng-show="(offerForm.city.$error.maxlength || offerForm.city.$error.minlength) && offerForm.city.$touched ">
+														<label class="control-label">Şehir 50 karaktere kadar olabilir</label>
+													</div>
+												</div>
+
 											</div>
 											<div class="col-lg-6">
-												<label>Bayi İsmi</label>
-												<input ng-model="newOffer.dealer" class="form-control" placeholder="Borusan İstinye">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.dealer.$invalid && offerForm.dealer.$touched)}">
+
+													<label>Bayi İsmi</label>
+													<input name="dealer" ng-model="newOffer.dealer" class="form-control" placeholder="Borusan İstinye" required ng-minlength="1" ng-maxlength="50">
+
+													<div class="invalid-message-half-column" ng-show="offerForm.dealer.$error.required && offerForm.dealer.$touched">
+														<label class="control-label">Bayi İsmi  Girilmesi Zorunludur</label>
+													</div>
+													<div class="invalid-message-half-column" ng-show="(offerForm.dealer.$error.maxlength || offerForm.dealer.$error.minlength) && offerForm.dealer.$touched ">
+														<label class="control-label">Bayi İsmi 50 karaktere kadar olabilir</label>
+													</div>
+												</div>
+
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-12">
+												<div class="form-group"></div>
 												<label>Paylaşmak istediğiniz ek bilgiler</label>
-												<textarea ng-model="newOffer.additional" class="form-control" rows="3" placeholder=""></textarea>
+												<textarea name="" ng-model="newOffer.additional" class="form-control" rows="3" placeholder=""></textarea>
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-12">
-												<label>Fiyat</label>
-												<input ng-model="newOffer.price" class="form-control" rows="3" placeholder="100.000"></textarea>
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.price.$invalid && offerForm.price.$touched)}">
+													<label>Fiyat</label>
+													<input name="price" ng-model="newOffer.price" class="form-control" rows="3" placeholder="190.000" required ng-minlength="1" ng-maxlength="50"></textarea>
+
+													<div class="invalid-message-half-column" ng-show="offerForm.price.$error.required && offerForm.price.$touched">
+														<label class="control-label">Fiyat Girilmesi Zorunludur</label>
+													</div>
+													<div class="invalid-message-half-column" ng-show="(offerForm.price.$error.maxlength || offerForm.price.$error.minlength) && offerForm.price.$touched ">
+														<label class="control-label">Fiyat 50 basamaklı olabilir</label>
+													</div>
+												</div>
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-12">
-												<label>Tarih</label>
-												<input ng-model="newOffer.date" class="form-control" rows="3" placeholder="01/05/17"></textarea>
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.date.$invalid && offerForm.date.$touched)}">
+													<label>Tarih</label>
+													<input name="date" ng-model="newOffer.date" class="form-control" rows="3" placeholder="01/05/17" required ng-minlength="1" ng-maxlength="50"></textarea>
+													<div class="invalid-message-half-column" ng-show="offerForm.date.$error.required && offerForm.date.$touched ">
+														<label class="control-label">Tarih girilmeli</label>
+													</div>
+												</div>
+
 											</div>
 										</div>
 
 										<div class="row mt-20">
 											<div class="col-lg-12">
-												<button type="submit" ng-click="addOffer()" class="btn btn-default">Ekle</button>
+												<button type="submit" ng-click="addOffer(offerForm.$invalid)" class="btn btn-default">Ekle</button>
 											</div>
 										</div>
                                     </form>
