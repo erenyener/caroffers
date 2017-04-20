@@ -30,8 +30,36 @@
 					    <p>Ek Bilgiler : {{offerForDetails.additional}}</p>
 					</script>
 
-			<div class="row">
+			<div class="row  mt-20">
 				<div class="col-lg-6">
+
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<div class="row">
+										<div class="col-xs-3">
+											<i class="fa fa-comments fa-5x"></i>
+										</div>
+										<div class="col-xs-9 text-right">
+											<div class="huge">{{orderCount}}</div>
+											<div>Sisteme Kayıtlı Teklif Sayısı!</div>
+										</div>
+									</div>
+								</div>
+								<a href="#">
+									<div class="panel-footer">
+										<span class="pull-right">Aşağıda Detaylı Arama Yapabilirsiniz</span>
+										<span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+										<div class="clearfix"></div>
+									</div>
+								</a>
+							</div>
+						</div>
+						<div class="col-lg-6">
+
+						</div>
+					</div>
 					<h3 class="page-header">Arama</h1>
 						<table ng-table="tableParam" class="table table-condensed table-bordered table-striped" show-filter="true">
 						    <tr ng-repeat="offer in $data">
@@ -47,10 +75,11 @@
 						</table>
 				</div>
 
-				<div class="col-lg-6 offer-form">
+				<div class="col-lg-6 panel panel-primary">
+
 					<h3 class="page-header">Teklif Gir</h1>
 
-						<div class="panel panel-default">
+						<div class="panel panel-primary">
                         <div class="panel-heading">
                             Teklif Detayları
                         </div>

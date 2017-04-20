@@ -10,6 +10,7 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
 	// Bind the todos to the firebase provider.
 	$scope.offers = $firebaseArray(fireRef);
     $scope.loading = true;
+    $scope.orderCount = 0;
     $scope.newOffer = {
         brand:"",
         model:"",
@@ -28,6 +29,8 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
         angular.forEach($scope.offers, function(offer) {
             offersDataSet.push(offer);
         })
+
+        $scope.orderCount = offersDataSet.length;
 
         var initialParams = {
                 count: 50 // initial page size
