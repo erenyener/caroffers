@@ -9,6 +9,8 @@
 	<link rel="stylesheet" href="./modules/todomvc-app-css/bootstrap.css">
 	<link rel="stylesheet" href="./modules/todomvc-app-css/sb-admin-2.css">
 	<link rel="stylesheet" href="./modules/todomvc-app-css/ng-table.min.css">
+	<link rel="stylesheet" href="./modules/ngDialog/ngDialog.css">
+	<link rel="stylesheet" href="./modules/ngDialog/ngDialog-theme-default.css">
 	<style>
 		[ng-cloak] {
 			display: none;
@@ -22,6 +24,11 @@
 
 		<div id="page-wrapper" style="min-height: 1000px;">
 
+					<script type="text/ng-template" id="offerDetail">
+					    <h3>{{offerForDetails.brand}} {{offerForDetails.model}}</h3>
+					    <p>Opsiyonlar : {{offerForDetails.optinals}}</p>
+					    <p>Ek Bilgiler : {{offerForDetails.additional}}</p>
+					</script>
 
 			<div class="row">
 				<div class="col-lg-6">
@@ -31,11 +38,11 @@
 								<td title="'Marka'" filter="{ brand: 'text'}">{{offer.brand}}</td>
 								<td title="'Model'" filter="{ model: 'text'}">{{offer.model}}</td>
 								<td title="'Paket'">{{offer.package}}</td>
-								<td title="'Yıl'">{{offer.model}}</td>
 								<td title="'Şehir'">{{offer.city}}</td>
 						        <td title="'Satıcı'">{{offer.dealer}}</td>
 						        <td title="'Fiyat'">{{offer.price}}</td>
 								<td title="'Tarih'">{{offer.date}}</td>
+								<td title="'Detaylar'"><button type="button" class="btn btn-danger btn-xs" ng-click="openDetails(offer)">Detayları Gör</button></td>
 						    </tr>
 						</table>
 				</div>
@@ -54,44 +61,43 @@
 
 										<div class="row">
 											<div class="col-lg-6">
-												<div class="form-group"  ng-class="{ 'has-error': (offerForm.brand.$invalid && offerForm.brand.$touched)}">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.brand.$invalid && (offerForm.brand.$touched || offerForm.$submitted))}">
 													<label>Marka</label>
 													<input ng-model="newOffer.brand" class="form-control" placeholder="BMW" name="brand"  required ng-minlength="1" ng-maxlength="40">
-													<div class="invalid-message-half-column" ng-show="offerForm.brand.$error.required && offerForm.brand.$touched">
+													<div class="invalid-message-half-column" ng-show="offerForm.brand.$error.required && (offerForm.brand.$touched || offerForm.$submitted)">
 														<label class="control-label">Marka Girilmesi Zorunludur</label>
 													</div>
-													<div class="invalid-message-half-column" ng-show="(offerForm.brand.$error.maxlength || offerForm.brand.$error.minlength) && offerForm.brand.$touched ">
+													<div class="invalid-message-half-column" ng-show="(offerForm.brand.$error.maxlength || offerForm.brand.$error.minlength) && (offerForm.brand.$touched || offerForm.$submitted) ">
 														<label class="control-label">Marka 40 karaktere kadar olabilir</label>
 													</div>
 												</div>
 											</div>
 
 											<div class="col-lg-6">
-												<div class="form-group"  ng-class="{ 'has-error': (offerForm.model.$invalid && offerForm.model.$touched)}">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.model.$invalid && (offerForm.model.$touched || offerForm.$submitted))}">
 													<label>Model</label>
 													<input ng-model="newOffer.model" class="form-control" name="model" placeholder="3.20ied" required ng-minlength="1" ng-maxlength="50">
 
-													<div class="invalid-message-half-column" ng-show="offerForm.model.$error.required && offerForm.model.$touched">
+													<div class="invalid-message-half-column" ng-show="offerForm.model.$error.required && (offerForm.model.$touched || offerForm.$submitted)">
 														<label class="control-label">Model Girilmesi Zorunludur</label>
 													</div>
-													<div class="invalid-message-half-column" ng-show="(offerForm.model.$error.maxlength || offerForm.model.$error.minlength) && offerForm.model.$touched ">
+													<div class="invalid-message-half-column" ng-show="(offerForm.model.$error.maxlength || offerForm.model.$error.minlength) && (offerForm.model.$touched || offerForm.$submitted) ">
 														<label class="control-label">Model 40 karaktere kadar olabilir</label>
 													</div>
 
 												</div>
 											</div>
 										</div>
-
 										<div class="row mt-20">
 											<div class="col-lg-6">
-												<div class="form-group"  ng-class="{ 'has-error': (offerForm.package.$invalid && offerForm.package.$touched)}">
+												<div class="form-group"  ng-class="{ 'has-error': (offerForm.package.$invalid && (offerForm.package.$touched || offerForm.$submitted))}">
 													<label>Paket İsmi</label>
 													<input name="package" ng-model="newOffer.package" class="form-control" required placeholder="M Plus" ng-maxlength="50">
 
-													<div class="invalid-message-half-column" ng-show="offerForm.package.$error.required && offerForm.package.$touched">
+													<div class="invalid-message-half-column" ng-show="offerForm.package.$error.required && (offerForm.package.$touched || offerForm.$submitted)">
 														<label class="control-label">Paket Girilmesi Zorunludur</label>
 													</div>
-													<div class="invalid-message-half-column" ng-show="(offerForm.package.$error.maxlength) && offerForm.package.$touched ">
+													<div class="invalid-message-half-column" ng-show="(offerForm.package.$error.maxlength) && (offerForm.package.$touched || offerForm.$submitted) ">
 														<label class="control-label">Paket 40 karaktere kadar olabilir</label>
 													</div>
 												</div>
@@ -161,7 +167,7 @@
 											<div class="col-lg-12">
 												<div class="form-group"  ng-class="{ 'has-error': (offerForm.price.$invalid && offerForm.price.$touched)}">
 													<label>Fiyat</label>
-													<input name="price" ng-model="newOffer.price" class="form-control" rows="3" placeholder="190.000" required ng-minlength="1" ng-maxlength="50"></textarea>
+													<input name="price" ui-number-mask="0" ng-model="newOffer.price" class="form-control" rows="3" placeholder="190.000" required ng-minlength="1" ng-maxlength="50"></textarea>
 
 													<div class="invalid-message-half-column" ng-show="offerForm.price.$error.required && offerForm.price.$touched">
 														<label class="control-label">Fiyat Girilmesi Zorunludur</label>
@@ -177,7 +183,7 @@
 											<div class="col-lg-12">
 												<div class="form-group"  ng-class="{ 'has-error': (offerForm.date.$invalid && offerForm.date.$touched)}">
 													<label>Tarih</label>
-													<input name="date" ng-model="newOffer.date" class="form-control" rows="3" placeholder="01/05/17" required ng-minlength="1" ng-maxlength="50"></textarea>
+													<input name="date" ui-date-mask="DD-MM-YYYY" ng-model="newOffer.date" class="form-control" rows="3" placeholder="Gün/Ay/Yıl" required ng-minlength="1" ng-maxlength="50"></textarea>
 													<div class="invalid-message-half-column" ng-show="offerForm.date.$error.required && offerForm.date.$touched ">
 														<label class="control-label">Tarih girilmeli</label>
 													</div>
@@ -188,7 +194,7 @@
 
 										<div class="row mt-20">
 											<div class="col-lg-12">
-												<button type="submit" ng-click="addOffer(offerForm.$invalid)" class="btn btn-default">Ekle</button>
+												<button type="submit" ng-click="addOffer(offerForm, offerForm.$invalid)" class="btn btn-default">Ekle</button>
 											</div>
 										</div>
                                     </form>
@@ -207,9 +213,12 @@
 
 		</section>
 
+
 		<script src="https://cdn.firebase.com/js/client/2.2.2/firebase.js"></script>
 		<script src="./modules/todomvc-common/base.js"></script>
 		<script src="./modules/angular/angular.js"></script>
+		<script src="./modules/ngDialog/ngDialog.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-input-masks/2.5.0/angular-input-masks-standalone.js"></script>
 		<script src="./modules/angularfire/dist/angularfire.js"></script>
 		<script src="./modules/ng-table/ng-table.min.js"></script>
 		<script src="./js/app.js"></script>

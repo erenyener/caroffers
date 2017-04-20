@@ -2,7 +2,7 @@
 'use strict';
 
 
-carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $firebaseArray, NgTableParams) {
+carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $firebaseArray, NgTableParams, ngDialog) {
 
     var url = 'https://caroffers-2d1be.firebaseio.com/offers';
 	var fireRef = new Firebase(url);
@@ -29,7 +29,10 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
             offersDataSet.push(offer);
         })
 
-        $scope.tableParam = new NgTableParams({}, {dataset: offersDataSet});
+        var initialParams = {
+                count: 50 // initial page size
+        };
+        $scope.tableParam = new NgTableParams(initialParams, {dataset: offersDataSet});
         $scope.loading = false;
 
     });
@@ -40,8 +43,17 @@ carOffersApp.controller('MainController', function TodoCtrl($scope, $location, $
 	$scope.newTodo = '';
 	$scope.editedTodo = null;
 
+    $scope.openDetails = function(offer){
+        ngDialog.open({
+            template: 'offerDetail',
+            controller: ['$scope', function($scope) {
+                $scope.offerForDetails = offer;
+            }]
+        });
+    }
 
-    $scope.addOffer = function(isInvalid){
+    $scope.addOffer = function(form, isInvalid){
+        form.$submitted = true;
 
         if(!isInvalid){
             $scope.offers.$add($scope.newOffer);
